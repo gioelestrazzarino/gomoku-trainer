@@ -21,8 +21,8 @@ export default function Home() {
 
   function startGame() {
     const id = generateGameId()
-    const params = new URLSearchParams({ color, strength: String(strength) })
-    router.push(`/game/${id}?${params}`)
+    const params = new URLSearchParams({ id, color, strength: String(strength) })
+    router.push(`/game?${params}`)
   }
 
   const strengthInfo: Record<AIStrength, { label: string; desc: string; color: string }> = {
@@ -111,7 +111,7 @@ export default function Home() {
         ) : (
           <div className="flex flex-col gap-2">
             {recentGames.map(game => (
-              <Link key={game.id} href={`/game/${game.id}`} className="flex items-center gap-3 p-3 rounded-xl transition-all hover:opacity-80" style={{ background: '#16213e', border: '1px solid #2a2a4a' }}>
+              <Link key={game.id} href={`/game?id=${game.id}`} className="flex items-center gap-3 p-3 rounded-xl transition-all hover:opacity-80" style={{ background: '#16213e', border: '1px solid #2a2a4a' }}>
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ background: game.result === 'black' ? '#111' : game.result === 'white' ? '#eee' : '#444', color: game.result === 'black' ? '#fff' : game.result === 'white' ? '#000' : '#aaa', border: '2px solid #2a3a5a' }}>
                   {game.result === 'black' ? '●' : game.result === 'white' ? '○' : '='}
                 </div>

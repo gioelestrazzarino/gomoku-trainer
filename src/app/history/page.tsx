@@ -88,7 +88,7 @@ export default function HistoryPage() {
                   {/* Actions */}
                   <div className="flex flex-col gap-1.5 shrink-0">
                     <Link
-                      href={`/game/${game.id}`}
+                      href={`/game?id=${game.id}`}
                       className="px-3 py-1.5 rounded text-xs font-semibold text-center hover:opacity-80 transition-all"
                       style={{ background: '#16213e', color: '#d4a843', border: '1px solid #d4a843' }}
                     >
@@ -96,7 +96,7 @@ export default function HistoryPage() {
                     </Link>
                     {game.analysis && (
                       <Link
-                        href={`/analysis/${game.id}`}
+                        href={`/analysis?id=${game.id}`}
                         className="px-3 py-1.5 rounded text-xs font-semibold text-center hover:opacity-80 transition-all"
                         style={{ background: '#1a3a1a', color: '#00cc44', border: '1px solid #00cc44' }}
                       >

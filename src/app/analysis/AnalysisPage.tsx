@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState, useCallback } from 'react'
-import { useParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { loadGame } from '@/lib/storage/db'
 import { GameRecord } from '@/lib/game/types'
@@ -9,8 +9,8 @@ import { ReplayBoard } from '@/components/replay/ReplayBoard'
 import { ReplayControls } from '@/components/replay/ReplayControls'
 
 export default function AnalysisPage() {
-  const params = useParams()
-  const gameId = params.id as string
+  const searchParams = useSearchParams()
+  const gameId = searchParams.get('id') as string
 
   const [game, setGame] = useState<GameRecord | null>(null)
   const [loading, setLoading] = useState(true)
@@ -50,7 +50,7 @@ export default function AnalysisPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4" style={{ background: '#0f0f1a' }}>
         <div className="text-gray-400">No analysis available for this game.</div>
-        <Link href={`/game/${gameId}`} style={{ color: '#d4a843' }}>← Back to Game</Link>
+        <Link href={`/game?id=${gameId}`} style={{ color: '#d4a843' }}>← Back to Game</Link>
       </div>
     )
   }
@@ -62,7 +62,7 @@ export default function AnalysisPage() {
       {/* Board area */}
       <div className="flex-1 flex flex-col items-center justify-start p-4 gap-4 overflow-x-auto">
         <div className="flex items-center gap-4 w-full max-w-xl">
-          <Link href={`/game/${gameId}`} className="text-xs hover:opacity-70 transition-all" style={{ color: '#d4a843' }}>
+          <Link href={`/game?id=${gameId}`} className="text-xs hover:opacity-70 transition-all" style={{ color: '#d4a843' }}>
             ← Game
           </Link>
           <h1 className="text-lg font-black" style={{ color: '#d4a843' }}>Analysis</h1>

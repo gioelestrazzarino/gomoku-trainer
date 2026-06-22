@@ -62,7 +62,7 @@ export function GameControls({
 
       {gameOver && hasAnalysis && (
         <Link
-          href={`/analysis/${gameId}`}
+          href={`/analysis?id=${gameId}`}
           className="w-full py-2 rounded text-sm font-semibold text-center block transition-all hover:opacity-80"
           style={{ background: '#1a3a1a', color: '#00cc44', border: '1px solid #2a5a2a' }}
         >

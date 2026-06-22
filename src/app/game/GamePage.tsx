@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Board } from '@/components/board/Board'
 import { GameHeader } from '@/components/game/GameHeader'
 import { HintPanel } from '@/components/game/HintPanel'
@@ -12,9 +12,8 @@ import { saveGame, loadGame } from '@/lib/storage/db'
 import { AIStrength, Color, GameRecord, GameStatus, Move, Position } from '@/lib/game/types'
 
 export default function GamePage() {
-  const params = useParams()
   const searchParams = useSearchParams()
-  const gameId = params.id as string
+  const gameId = searchParams.get('id') as string
 
   // Game setup from URL params
   const playerColor = (searchParams.get('color') as Color) || 'black'
@@ -55,7 +54,7 @@ export default function GamePage() {
 
   // Init engine worker
   useEffect(() => {
-    const worker = new Worker(new URL('../../../workers/engine.worker.ts', import.meta.url))
+    const worker = new Worker(new URL('../../workers/engine.worker.ts', import.meta.url))
     engineWorkerRef.current = worker
 
     worker.onmessage = (e) => {
@@ -246,7 +245,7 @@ export default function GamePage() {
     setIsAnalyzing(true)
     setAnalysisProgress(0)
 
-    const worker = new Worker(new URL('../../../workers/analysis.worker.ts', import.meta.url))
+    const worker = new Worker(new URL('../../workers/analysis.worker.ts', import.meta.url))
     analysisWorkerRef.current = worker
 
     worker.onmessage = (e) => {
